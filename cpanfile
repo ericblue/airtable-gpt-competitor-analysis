@@ -1,0 +1,17 @@
+requires 'Cwd';
+requires 'Data::Dump';
+requires 'Encode';
+requires 'Env::Dot';
+requires 'Exporter';
+requires 'File::Path';
+requires 'File::Slurp';
+requires 'FindBin';
+requires 'JSON';
+requires 'LWP::Protocol::https';
+requires 'LWP::UserAgent';
+requires 'Log::Log4perl';
+requires 'Module::ExtractUse';
+requires 'Mojolicious::Lite';
+requires 'Mojolicious::Plugin::OpenAPI';
+requires 'Mojolicious::Plugin::SwaggerUI';
+requires 'Pod::Usage';

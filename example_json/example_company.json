@@ -1,0 +1,254 @@
+{
+  "Companies": [
+    {
+      "Approx. Number of Employees": 200,
+      "Company URL": "https://notion.so",
+      "Founded": 2016,
+      "Funding Amount": 67000000,
+      "Investors": "First Round Capital, Index Ventures, Andreessen Horowitz",
+      "Name": "Notion",
+      "Press Link": "https://www.notion.so/about#press",
+      "VC Funding": true
+    }
+  ],
+  "Features": [
+    {
+      "Description": "Automatically reduce down to essential information.",
+      "Do we have this feature?": false,
+      "Name": "Summarization"
+    },
+    {
+      "Description": "AI capable of improving its performance based on user input.",
+      "Do we have this feature?": false,
+      "Name": "Self-Learning AI"
+    },
+    {
+      "Description": "Capture and organize personal knowledge and information in a single repository.",
+      "Do we have this feature?": true,
+      "Name": "Personal Knowledge Base"
+    },
+    {
+      "Description": "Application Programming Interface for integrating with other tools and services.",
+      "Do we have this feature?": true,
+      "Name": "API"
+    },
+    {
+      "Description": "Provide searchable text versions of audio or video materials.",
+      "Do we have this feature?": false,
+      "Name": "Searchable transcripts"
+    },
+    {
+      "Description": "Ability to link related information across the system.",
+      "Do we have this feature?": false,
+      "Name": "Connect Knowledge"
+    },
+    {
+      "Description": "Support for importing audio and video files.",
+      "Do we have this feature?": false,
+      "Name": "Imports Audio & Video"
+    },
+    {
+      "Description": "Automatic creation of notes based on content.",
+      "Do we have this feature?": false,
+      "Name": "Automatic Note Generation"
+    },
+    {
+      "Description": "Supports the processing of video files.",
+      "Do we have this feature?": false,
+      "Name": "Video processing"
+    },
+    {
+      "Description": "Automatic creation of summaries from longer texts.",
+      "Do we have this feature?": false,
+      "Name": "Automatic Summarization"
+    },
+    {
+      "Description": "Automatic generation of content using AI.",
+      "Do we have this feature?": false,
+      "Name": "Content Generation"
+    },
+    {
+      "Description": "Options to import various types of data into the system.",
+      "Do we have this feature?": true,
+      "Name": "Import Options"
+    },
+    {
+      "Description": "Multiple users can work on the same document or project simultaneously in real-time.",
+      "Do we have this feature?": true,
+      "Name": "Real-Time Collaboration"
+    },
+    {
+      "Description": "Capability to ask and answer questions within the system.",
+      "Do we have this feature?": false,
+      "Name": "Q&A Functionality"
+    },
+    {
+      "Description": "Tools to facilitate teamwork and collective effort.",
+      "Do we have this feature?": true,
+      "Name": "Collaboration tools"
+    },
+    {
+      "Description": "Supports different languages for content creation and usage.",
+      "Do we have this feature?": true,
+      "Name": "Supports Multiple Languages"
+    },
+    {
+      "Description": "Organization and citation of references for research.",
+      "Do we have this feature?": false,
+      "Name": "Reference Management"
+    },
+    {
+      "Description": "Ability to create user personas for different contexts or scenarios.",
+      "Do we have this feature?": false,
+      "Name": "Personas"
+    },
+    {
+      "Description": "Features ensuring user data is protected and privacy is maintained.",
+      "Do we have this feature?": true,
+      "Name": "Privacy and security"
+    },
+    {
+      "Description": "Automated conversational agents to assist users.",
+      "Do we have this feature?": false,
+      "Name": "AI Chatbot"
+    },
+    {
+      "Description": "AI model tailored for individual user needs.",
+      "Do we have this feature?": false,
+      "Name": "Personalized AI Model"
+    },
+    {
+      "Description": "Predefined structures for common use cases to save time and ensure consistency.",
+      "Do we have this feature?": true,
+      "Name": "Templates"
+    },
+    {
+      "Description": "Support for recording and transcribing voice notes.",
+      "Do we have this feature?": false,
+      "Name": "Voice Notes"
+    },
+    {
+      "Description": "Visual representation of information in mindmaps or graphs.",
+      "Do we have this feature?": true,
+      "Name": "MindMap or Graph Output"
+    },
+    {
+      "Description": "Multiple users can write and edit documents together.",
+      "Do we have this feature?": true,
+      "Name": "Collaborative Writing"
+    },
+    {
+      "Description": "AI features that facilitate collaboration among users.",
+      "Do we have this feature?": false,
+      "Name": "Collaborative AI Features"
+    },
+    {
+      "Description": "Create and use flashcards for learning and memory aids.",
+      "Do we have this feature?": false,
+      "Name": "Flashcards"
+    },
+    {
+      "Description": "Options to export content to various formats and platforms.",
+      "Do we have this feature?": true,
+      "Name": "Export Options"
+    },
+    {
+      "Description": "Use of AI to provide insightful analytics.",
+      "Do we have this feature?": false,
+      "Name": "AI-powered Analytics"
+    },
+    {
+      "Description": "Use of AI to create summaries from content.",
+      "Do we have this feature?": false,
+      "Name": "AI Summarization"
+    },
+    {
+      "Description": "Users can customize summaries according to their needs.",
+      "Do we have this feature?": false,
+      "Name": "Customizable Summaries"
+    },
+    {
+      "Description": "Automatically organize information based on context and relevance.",
+      "Do we have this feature?": true,
+      "Name": "Smart organization"
+    },
+    {
+      "Description": "Notebook with integrated AI features for enhanced note-taking.",
+      "Do we have this feature?": false,
+      "Name": "AI Powered Notebook"
+    },
+    {
+      "Description": "Ability to integrate and use data from various sources.",
+      "Do we have this feature?": true,
+      "Name": "Data Integration"
+    },
+    {
+      "Description": "Extension for web browsers to enhance functionality or integration.",
+      "Do we have this feature?": true,
+      "Name": "Browser Extension"
+    },
+    {
+      "Description": "Use of AI to enhance the learning process.",
+      "Do we have this feature?": false,
+      "Name": "AI Powered Learning"
+    },
+    {
+      "Description": "Convert speech (live or recorded) into written text.",
+      "Do we have this feature?": false,
+      "Name": "Transcription"
+    },
+    {
+      "Description": "Enhanced search capabilities allowing for more precise queries.",
+      "Do we have this feature?": true,
+      "Name": "Advanced Search"
+    },
+    {
+      "Description": "A knowledge base enhanced with AI for improved organization and retrieval of information.",
+      "Do we have this feature?": false,
+      "Name": "AI-powered Knowledge Base"
+    },
+    {
+      "Description": "Search functionality enhanced by artificial intelligence.",
+      "Do we have this feature?": false,
+      "Name": "AI-powered search"
+    },
+    {
+      "Description": "Artificial intelligence that assists in remembering and retrieving information efficiently.",
+      "Do we have this feature?": false,
+      "Name": "Memory AI"
+    },
+    {
+      "Description": "Provide immediate insights based on current data.",
+      "Do we have this feature?": false,
+      "Name": "Real-time Insights"
+    }
+  ],
+  "Products": [
+    {
+      "Add'l Notes": "Notion combines many productivity solutions into one, allowing for customizability and higher integration among tools.",
+      "Company": "Notion",
+      "Features": [
+        "Personal Knowledge Base",
+        "API",
+        "Real-Time Collaboration",
+        "Templates",
+        "Import Options",
+        "Collaboration tools",
+        "Supports Multiple Languages",
+        "Export Options",
+        "Advanced Search",
+        "Data Integration",
+        "Browser Extension"
+      ],
+      "Messaging": "A unified workspace for notes, tasks, wikis, and databases. Used for project management and personal organization.",
+      "Name": "Notion",
+      "Pricing": "Free: $0/month, Personal Pro: $4/month, Team: $8/user/month, Enterprise: Custom pricing",
+      "Target Audience(s)": [
+        "Academia",
+        "Corporate",
+        "Personal"
+      ],
+      "Website": "https://notion.so"
+    }
+  ]
+}

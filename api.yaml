@@ -1,0 +1,188 @@
+openapi: 3.0.0
+info:
+  title: Airtable GPT - Competitor Analysis API
+  version: 1.0.0
+paths:
+  /analyze:
+    get:
+      summary: Analyze company data and return CompanyData JSON for review
+      parameters:
+        - name: website_url
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The URL of the company website to analyze.
+        - name: leverage_existing_features
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: true
+          description: Whether to leverage existing features stored in Airtable
+      responses:
+        '200':
+          description: Analysis result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyData'
+
+  /analyze-and-import:
+    get:
+      summary: Analyze and Import Airtable CompanyData in a single call
+      parameters:
+        - name: website_url
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The URL of the company website to analyze.
+        - name: leverage_existing_features
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: true
+          description: Whether to leverage existing features stored in Airtable
+      responses:
+        '200':
+          description: Import result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+
+  /import:
+    post:
+      summary: Import CompanyData JSON into Airtable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyData'
+      responses:
+        '200':
+          description: Import result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+  /export:
+    get:
+      summary: Export data
+      description: Returns all current Company, Product, and Features data from Airtable and exports them into a combined data structure.
+      responses:
+        '200':
+          description: A JSON object of the exported data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Companies:
+                    type: array
+                    items:
+                      type: object
+                  Products:
+                    type: array
+                    items:
+                      type: object
+                  Features:
+                    type: array
+                    items:
+                      type: object
+  /config:
+    get:
+      summary: Get configuration
+      description: Returns all the environment variables used to initialize the modules in the other controllers.
+      responses:
+        '200':
+          description: A JSON object of the configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  OPENAI_API_KEY:
+                    type: string
+                    description: The obfuscated OpenAI API key
+                  AIRTABLE_BASE_ID:
+                    type: string
+                    description: The Airtable base ID
+                  AIRTABLE_API_KEY:
+                    type: string
+                    description: The obfuscated Airtable API key
+                  LOG_LEVEL:
+                    type: string
+                    description: The log level
+
+components:
+  schemas:
+    CompanyData:
+      type: object
+      properties:
+        Companies:
+          type: array
+          items:
+            type: object
+            properties:
+              Approx. Number of Employees:
+                type: integer
+              Company URL:
+                type: string
+              Founded:
+                type: integer
+              Funding Amount:
+                type: integer
+              Investors:
+                type: string
+              Name:
+                type: string
+              Press Link:
+                type: string
+              VC Funding:
+                type: boolean
+        Features:
+          type: array
+          items:
+            type: object
+            properties:
+              Description:
+                type: string
+              Do we have this feature?:
+                type: boolean
+              Name:
+                type: string
+        Products:
+          type: array
+          items:
+            type: object
+            properties:
+              Add'l Notes:
+                type: string
+              Company:
+                type: string
+              Features:
+                type: array
+                items:
+                  type: string
+              Messaging:
+                type: string
+              Name:
+                type: string
+              Pricing:
+                type: string
+              Target Audience(s):
+                type: array
+                items:
+                  type: string
+              Website:
+                type: string
