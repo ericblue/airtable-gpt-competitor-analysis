@@ -19,6 +19,10 @@ release:
 	perl update_version.pl --version $(VERSION)
 	@if git status --porcelain | grep -q "lib/AirtableGPT/Version.pm"; then \
 		echo "Committing version changes before releasing."; \
+		git add lib/AirtableGPT/Version.pm; \
+		git commit -m "Update version to $(VERSION)"; \
+		git tag -f -a $(VERSION) -m "Release $(VERSION)"; \
+		git push origin $(VERSION); \
 	else \
 		echo "lib/AirtableGPT/Version.pm has not been modified."; \
 	fi
