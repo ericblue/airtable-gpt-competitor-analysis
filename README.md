@@ -23,7 +23,7 @@ Why build this?  Shortly after GPT 4o came out I was doing some competitor analy
 
 ## Tech
 
-- **Perl / Mojolicous **
+- **Perl / Mojolicous**
 - **React**
 - **OpenAI GPT-4o**
 - **Swagger for API documentation**
