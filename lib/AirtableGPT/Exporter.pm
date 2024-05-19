@@ -1,4 +1,4 @@
-package AirtableExporter;
+package AirtableGPT::Exporter;
 
 use strict;
 use warnings;
@@ -6,10 +6,27 @@ use LWP::UserAgent;
 use JSON;
 use Log::Log4perl;
 use Data::Dump;
-use Util 'obfuscate_key';
+use AirtableGPT::Util 'obfuscate_key';
 use Exporter 'import';
 
 our @EXPORT_OK = qw(new export_airtable);
+
+=head1 NAME
+
+AirtableGPT::Exporter - A module for exporting competitor data from Airtable
+
+=head1 SYNOPSIS
+
+  use AirtableGPT::Exporter;
+
+  my $airtable_exporter = AirtableGPT::Exporter->new(
+     airtable_base_id => 'your_api_key',
+     airtable_api_key => 'your_base_id',
+     logger => $logger
+  );
+  my $results = $airtable_exporter->export_airtable();
+
+=cut
 
 sub new {
     my ($class, %args) = @_;

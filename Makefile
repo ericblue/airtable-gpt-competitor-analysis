@@ -5,6 +5,28 @@ TAG ?= "latest"
 
 all: install
 
+# Usage: make release VERSION=v0.1
+#
+# This will create an updated Version.pm file, git tag and push it to the remote repository
+#
+release:
+	test -n "$(VERSION)" || (echo "VERSION is required" && exit 1)
+	@echo "Updating Version.pm to $(VERSION)"
+	@if git status --porcelain | grep -v "lib/AirtableGPT/Version.pm"; then \
+		echo "There are uncommitted changes in files other than lib/AirtableGPT/Version.pm. Please commit and push these changes before releasing."; \
+		exit 1; \
+	fi
+	perl update_version.pl --version $(VERSION)
+	@if git status --porcelain | grep -q "lib/AirtableGPT/Version.pm"; then \
+		echo "Committing version changes before releasing."; \
+	else \
+		echo "lib/AirtableGPT/Version.pm has not been modified."; \
+	fi
+
+
+getVersion:
+	@perl -Mlib=lib -MAirtableGPT::Version -e 'print "$$AirtableGPT::Version::VERSION\n"'
+
 cpanfile:
 	perl generate_cpanfile.pl > cpanfile
 

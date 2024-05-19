@@ -2,7 +2,7 @@
 
 use FindBin;
 use lib "$FindBin::Bin/../lib";
-use AirtableExporter;
+use AirtableGPT::Exporter;
 use Getopt::Long;
 use Env::Dot;
 use Log::Log4perl;
@@ -33,7 +33,7 @@ my $logger = Log::Log4perl->get_logger();
 # Load environment variables from .env file
 Env::Dot->import('.env');
 
-my $airtable_exporter = AirtableExporter->new(
+my $airtable_exporter = AirtableGPT::Exporter->new(
     airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
     airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
     logger => $logger

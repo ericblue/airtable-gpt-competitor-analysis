@@ -1,4 +1,4 @@
-package AirtableImporter;
+package AirtableGPT::Importer;
 
 use strict;
 use warnings;
@@ -7,22 +7,22 @@ use JSON;
 use File::Slurp;
 use Log::Log4perl;
 use Data::Dump;
-use Util 'obfuscate_key';
+use AirtableGPT::Util 'obfuscate_key';
 use Exporter 'import';
 
 our @EXPORT_OK = qw(new import_airtable fetch_existing_records read_json_file);
 
 =head1 NAME
 
-AirtableImporter - A module for importing data from Airtable
+AirtableGPT::Importer - A module for importing competitor data to Airtable
 
 =head1 SYNOPSIS
 
-  use AirtableImporter;
+  use AirtableGPT::Importer;
 
-  my $importer = AirtableImporter->new(
-    api_key => 'your_api_key',
-    base_id => 'your_base_id',
+  my $importer = AirtableGPT::Importer->new(
+    airtable_api_key => 'your_api_key',
+    airtable_base_id => 'your_base_id',
   );
 
   $importer->import_airtable;

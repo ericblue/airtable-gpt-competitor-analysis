@@ -1,4 +1,4 @@
-package Util;
+package AirtableGPT::Util;
 
 use strict;
 use warnings;

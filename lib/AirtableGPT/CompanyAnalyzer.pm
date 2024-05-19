@@ -1,4 +1,4 @@
-package CompanyAnalyzer;
+package AirtableGPT::CompanyAnalyzer;
 use strict;
 use warnings;
 use LWP::UserAgent;
@@ -19,17 +19,17 @@ binmode STDOUT, ':utf8';
 
 =head1 NAME
 
-CompanyAnalyzer - A module for analyzing company data
+CompanyAnalyzer - A module for analyzing competitor data from a given website URL
 
 =head1 SYNOPSIS
 
-  use CompanyAnalyzer;
+  use AirtableGPT::CompanyAnalyzer;
 
-  my $analyzer = CompanyAnalyzer->new(
-    openai_api_key => $ENV{'OPENAI_API_KEY'},
-    airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
-    airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
-    leverage_existing_features => $leverage_existing_features,
+  my $analyzer = AirtableGPT::CompanyAnalyzer->new(
+    openai_api_key => 'openai api key'',
+    airtable_base_id => 'airtable base id'',
+    airtable_api_key => 'airtable api key',
+    leverage_existing_features => boolean (1 or 0),
   );
 
   my $result = $analyzer->analyze($website_url, $output_dir);
@@ -43,9 +43,9 @@ This module provides methods for analyzing company data.
 
 =head2 new
 
-  my $analyzer = CompanyAnalyzer->new(%args);
+  my $analyzer = AirtableGPT::CompanyAnalyzer->new(%args);
 
-Creates a new CompanyAnalyzer object.
+Creates a new AirtableGPT::CompanyAnalyzer object.
 
 =cut
 
@@ -54,8 +54,8 @@ sub new {
 
     die "Missing required arguments: openai_api_key, airtable_api_key, airtable_base_id" unless
         exists $args{openai_api_key} &&
-        exists $args{airtable_api_key} &&
-        exists $args{airtable_base_id};
+            exists $args{airtable_api_key} &&
+            exists $args{airtable_base_id};
 
     # If leverage_existing_features, default to 1
     $args{leverage_existing_features} = 1 unless exists $args{leverage_existing_features};
@@ -89,8 +89,6 @@ sub analyze {
     # Otherwise return JSON data
     return $data;
 
-
-
 }
 
 =head2 send_request
@@ -105,7 +103,7 @@ sub send_request {
 
     my $features_url = "https://api.airtable.com/v0/$self->{'airtable_base_id'}/Features";
     my %existing_features = $self->fetch_existing_records($features_url);
-    $self->{logger}->debug("Existing features " . Data::Dumper->Dump([\%existing_features]));
+    $self->{logger}->debug("Existing features " . Data::Dumper->Dump([ \%existing_features ]));
 
     my $feature_instructions = "";
 
@@ -114,18 +112,19 @@ sub send_request {
         $feature_instructions = "For features please try to use existing definitions from the following list:";
 
         foreach my $feature (keys %existing_features) {
-            $feature_instructions.= "- $feature\n";
+            $feature_instructions .= "- $feature\n";
         }
 
-        $feature_instructions.= "Only include features from this list if you are certain the functionality is present.  Only add a new feature if you feel it is important or useful and not already covered by the existing features.";
+        $feature_instructions .= "Only include features from this list if you are certain the functionality is present.  Only add a new feature if you feel it is important or useful and not already covered by the existing features.";
 
-    } else {
+    }
+    else {
         $self->{logger}->info("Not leveraging existing features");
     }
 
     # Note: The prompt is a heredoc string that contains the instructions for the OpenAI API
     # Any major changes to the prompt and fields will require updates to api.yaml and have a
-    # cascading effect on the OpenAPI schema and the generated code, and AirtableImporter class
+    # cascading effect on the OpenAPI schema and the generated code, and AirtableGPT::AirtableImporter class
 
     my $prompt = <<"END_PROMPT";
 I need to analyze the website $website_url and extract information to create JSON files for companies, products, and features.
@@ -181,8 +180,8 @@ END_PROMPT
     my $response = $ua->post(
         'https://api.openai.com/v1/chat/completions',
         Content => encode_utf8(encode_json({
-            model => 'gpt-4o',
-            messages => [{ role => 'user', content => $prompt }],
+            model    => 'gpt-4o',
+            messages => [ { role => 'user', content => $prompt } ],
         }))
     );
 
@@ -190,9 +189,10 @@ END_PROMPT
         my $content = decode_json($response->decoded_content);
         #print Data::Dumper->Dump([$content->{"choices"}[0]{"message"}->{"content"}]);
         my $json_text = $content->{choices}[0]{message}{content};
-        $json_text =~ s/.*```json\n(.*)\n```/$1/s;  # Extract the JSON part
+        $json_text =~ s/.*```json\n(.*)\n```/$1/s; # Extract the JSON part
         return decode_json($json_text);
-    } else {
+    }
+    else {
         die "Failed to send request: " . $response->status_line;
     }
 
@@ -226,7 +226,7 @@ sub fetch_existing_records {
     do {
         my $fetch_url = $url;
         $fetch_url .= "?offset=$offset" if $offset;
-        my $response =  $ua->get($fetch_url);
+        my $response = $ua->get($fetch_url);
 
         if ($response->is_success) {
             my $content = decode_json($response->decoded_content);
@@ -234,7 +234,8 @@ sub fetch_existing_records {
                 $existing_records{$record->{'fields'}->{'Name'}} = $record->{'id'};
             }
             $offset = $content->{'offset'};
-        } else {
+        }
+        else {
             $self->{logger}->info("Failed to fetch records: ", $response->status_line, "\n");
             $self->{logger}->info($response->decoded_content, "\n");
             #last;
@@ -256,7 +257,7 @@ sub write_file_utf8 {
     my ($self, $file_path, $data) = @_;
 
     open my $fh, '>', $file_path or die "Could not open '$file_path' for writing: $!";
-    binmode($fh, ":utf8");  # Set the file handle to UTF-8
+    binmode($fh, ":utf8"); # Set the file handle to UTF-8
     print $fh $data;
     close $fh;
 }

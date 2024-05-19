@@ -2,7 +2,7 @@
 
 use FindBin;
 use lib "$FindBin::Bin/../lib";
-use CompanyAnalyzer;
+use AirtableGPT::CompanyAnalyzer;
 use Getopt::Long;
 use Env::Dot;
 use Data::Dump;
@@ -59,7 +59,7 @@ my $env_file = "$FindBin::Bin/../.env";
 Env::Dot->import($env_file);
 
 
-my $analyzer = CompanyAnalyzer->new(
+my $analyzer = AirtableGPT::CompanyAnalyzer->new(
     openai_api_key => $ENV{'OPENAI_API_KEY'},
     airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
     airtable_api_key => $ENV{'AIRTABLE_API_KEY'},

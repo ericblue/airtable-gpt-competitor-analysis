@@ -2,10 +2,11 @@
 
 use FindBin;
 use lib "$FindBin::Bin/./lib";
-use CompanyAnalyzer;
-use AirtableImporter;
-use AirtableExporter;
-use Util 'obfuscate_key';
+use AirtableGPT::CompanyAnalyzer;
+use AirtableGPT::Importer;
+use AirtableGPT::Exporter;
+use AirtableGPT::Version;
+use AirtableGPT::Util 'obfuscate_key';
 use Env::Dot;
 use Mojolicious::Lite;
 use Mojolicious::Plugin::OpenAPI;
@@ -102,7 +103,7 @@ get '/api/analyze' => sub {
     }
 
     my $leverage_existing_features = 1;
-    my $analyzer = CompanyAnalyzer->new(
+    my $analyzer = AirtableGPT::CompanyAnalyzer->new(
         openai_api_key => $ENV{'OPENAI_API_KEY'},
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
         airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
@@ -122,7 +123,7 @@ post '/api/import' => sub {
     my $c = shift;
     my $data = $c->req->json;
 
-    my $airtable_importer = AirtableImporter->new(
+    my $airtable_importer = AirtableGPT::Importer->new(
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
         airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
         logger => $logger
@@ -140,7 +141,7 @@ get '/api/analyze-and-import' => sub {
     my $website_url = $c->param('website_url');
 
     my $leverage_existing_features = 1;
-    my $analyzer = CompanyAnalyzer->new(
+    my $analyzer = AirtableGPT::CompanyAnalyzer->new(
         openai_api_key => $ENV{'OPENAI_API_KEY'},
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
         airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
@@ -152,7 +153,7 @@ get '/api/analyze-and-import' => sub {
 
     my $data = $analyzer->analyze($website_url);
 
-    my $airtable_importer = AirtableImporter->new(
+    my $airtable_importer = AirtableGPT::Importer->new(
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
         airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
         logger => $logger
@@ -170,7 +171,7 @@ get '/api/analyze-and-import' => sub {
 get '/api/export' => sub {
     my $c = shift;
 
-    my $airtable_exporter = AirtableExporter->new(
+    my $airtable_exporter = AirtableGPT::Exporter->new(
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
         airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
         logger => $logger
@@ -200,5 +201,8 @@ $logger->info("Log level set to $log_level");
 
 my $host = $ENV{'HOST'} // 'localhost';
 my $port = $ENV{'PORT'} // '3000';
+
+my $version = $AirtableGPT::Version::VERSION;
+$logger->info("Starting AirtableGPT version ($version)");
 
 app->start('daemon', '-l', "http://$host:$port");

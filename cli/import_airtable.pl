@@ -33,7 +33,7 @@ my $logger = Log::Log4perl->get_logger();
 # Load environment variables from .env file
 Env::Dot->import('.env');
 
-my $airtable_importer = AirtableImporter->new(
+my $airtable_importer = AirtableGPT::AirtableImporter->new(
     airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
     airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
     logger => $logger
