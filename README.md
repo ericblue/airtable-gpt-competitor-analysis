@@ -4,7 +4,7 @@
 
 Airtable GPT - Competitor Analysis API and CLI tools
 
-Performs automated competitor analysis given a company's website URL using OpenAI's GPT-4o (Omni). Airtable GPT provides both CLI tools to analyze and import data, along with a set of APIs (Swagger) to extract key Company, Product, and Features information and automatically import into your copy of the competitor tracking Airtable base.
+Performs automated competitor analysis given a company's website URL using OpenAI's GPT-4o (Omni). Airtable GPT provides a simple webappp (React), and CLI tools to analyze and import data, along with a set of APIs (Swagger) to extract key Company, Product, and Features information and automatically import into your copy of the competitor tracking Airtable base.
 
 (Based on Airtable GPT - Competitor Tracking - [Template base](https://www.airtable.com/templates/competitor-tracking/expQhQ5bgx8xspSEi))
 
@@ -24,6 +24,7 @@ Why build this?  Shortly after GPT 4o came out I was doing some competitor analy
 ## Tech
 
 - **Perl / Mojolicous **
+- **React**
 - **OpenAI GPT-4o**
 - **Swagger for API documentation**
 
@@ -148,6 +149,43 @@ Web application available at http://localhost:3000
 
 ![swagger](images/swagger.png)
 
+
+### Accessing the Web App
+
+After running the local web and API server, browse to http://localhost:3000
+
+Starter Page
+
+The starter page gives quick links to the Github repo, Swagger endpoints, and React App
+
+![starter](images/starter.png)
+
+React App
+
+The simple UI under the /app endpoint will allow you to Analyze a company URL, Import the data. And additionall Export all Airtable data in JSON format.
+
+![react-app](images/react-app.png)
+
+### Modifying and Building the React App
+
+The React app has already been built and accessible under the http://localhost:3000/app endpoint and compiled to the resources/public/static and resources/public/app directories.
+
+If you wish to make modification you can run the following commands:
+
+```sh
+# Removes current react app from the resources/public dir served by Mojolicous
+make cleanReactApp
+# Clean/Wipe removes node_modules, build dirs and package-json.lock files
+make cleanReactBuild
+# Does a fresh npm install and build; and copies build artifacts back to resources/public
+make buildReactApp
+# Runs react in dev mode (e.g. port 3001) so files under react-app can be built and tested
+# Note: a proxy is set to automatically forward to http://localhost:3000
+make runReactDev
+
+```
+
+
 ## Docker
 
 Build and run the Docker image:
@@ -169,4 +207,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Author
 
-Created by Eric Blue ([https://eric-blue.com](https://eric-blue.com/)
+Created by Eric Blue ([https://eric-blue.com](https://eric-blue.com/))

@@ -12,6 +12,7 @@ use Mojolicious::Plugin::OpenAPI;
 use Mojolicious::Plugin::SwaggerUI;
 use Log::Log4perl::Level;
 use Log::Log4perl;
+use URI::Escape;
 use Data::Dump;
 use JSON;
 
@@ -68,6 +69,12 @@ get '/' => sub {
     $c->reply->static('index.html');
 };
 
+get '/app' => sub {
+    my $c = shift;
+    $c->reply->static('app/index.html');
+};
+
+
 get '/api/config' => sub {
     my $c = shift;
 
@@ -83,7 +90,16 @@ get '/api/config' => sub {
 
 get '/api/analyze' => sub {
     my $c = shift;
-    my $website_url = $c->param('website_url');
+
+    my $website_url = uri_unescape($c->param('website_url'));
+
+    print "url = $website_url\n";
+
+    # Check for a valid properly formatted website_url that is http or https
+    if (!defined $website_url || $website_url !~ m{^https?://[^\s/$.?#].[^\s]*$}) {
+        $c->render(json => { error => "Invalid website URL" });
+        return;
+    }
 
     my $leverage_existing_features = 1;
     my $analyzer = CompanyAnalyzer->new(

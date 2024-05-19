@@ -36,3 +36,8 @@ local
 
 ### ENV ###
 .env
+
+### React build ###
+react-app/build
+react-app/node_modules
+react-app/package-lock.json

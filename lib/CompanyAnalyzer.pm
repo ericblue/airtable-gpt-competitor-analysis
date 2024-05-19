@@ -11,8 +11,11 @@ use Data::Dump;
 use Encode qw(encode_utf8);
 use Log::Log4perl;
 use Exporter 'import';
+use utf8;
 
 our @EXPORT_OK = qw(new analyze send_request fetch_existing_records write_json_files);
+
+binmode STDOUT, ':utf8';
 
 =head1 NAME
 

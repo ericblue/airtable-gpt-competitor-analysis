@@ -50,6 +50,28 @@ pushDocker:
 	@docker tag $(IMAGE_NAME):$(TAG) $(REGISTRY)/$(IMAGE_NAME):$(TAG)
 	@docker push $(REGISTRY)/$(IMAGE_NAME):$(TAG)
 
+# Clean the React build
+cleanReactApp:
+	rm -rf resources/public/static
+	rm -rf resources/public/app
+
+# Clean the React build
+cleanReactBuild:
+	rm -rf react-app/build
+	rm -rf react-app/node_modules
+	rm -rf react-app/package-lock.json
+
+# Build the React application
+buildReactApp:
+	mkdir -p resources/public/app
+	cd react-app && npm install && npm run build && cd -
+
+# Run the React application in dev mode
+# Runs 'npm start' from react-app on another port instead of through the Mojolicious app
+# Proxy is configured to support a passthrough on port 3000
+runReactDev:
+	cd react-app && npm start && cd -
+
 # Display usage information
 help:
 	@echo "Makefile for generating releases and building/pushing Docker images"
@@ -59,6 +81,10 @@ help:
 	@echo "  make runDocker [TAG=tag] - Run Docker image with optional tag (default: 'latest')"
 	@echo "  make attachDocker - Attach to the running Docker container"
 	@echo "  make pushDocker [TAG=tag] - Push Docker image to registry with optional tag (default: 'latest')"
+	@echo "  make cleanReactApp - Remove the static and app directories under resources/public"
+	@echo "  make cleanReactBuild - Remove the build directory, node_modules, and package-lock.json from react-app"
+	@echo "  make buildReactApp - Build the React application"
+	@echo "  make runReactDev - Run the React application in dev mode"
 	@echo "  make help - Display this message"
 	@echo ""
 	@echo "Example:"
@@ -66,6 +92,10 @@ help:
 	@echo "  make runDocker TAG=0.1"
 	@echo "  make attachDocker"
 	@echo "  make pushDocker TAG=0.1"
+	@echo "  make cleanReactApp"
+	@echo "  make cleanReactBuild"
+	@echo "  make buildReactApp"
+	@echo "  make runReactDev"
 
 # Define default goal
 .DEFAULT_GOAL := help
