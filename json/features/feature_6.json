@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Name" : "Self-Learning AI",
+      "Description" : "AI that improves its performance over time by learning from user interactions.",
+      "Do we have this feature?" : true
+   }
+}

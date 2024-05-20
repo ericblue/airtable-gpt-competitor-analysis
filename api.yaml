@@ -45,6 +45,12 @@ paths:
             type: boolean
             default: true
           description: Whether to leverage existing features stored in Airtable
+        - in: query
+          name: dryrun
+          schema:
+            type: boolean
+            default: false
+          description: If true, the import operation will be simulated but not actually performed.
       responses:
         '200':
           description: Import result
@@ -59,6 +65,13 @@ paths:
   /import:
     post:
       summary: Import CompanyData JSON into Airtable
+      parameters:
+        - in: query
+          name: dryrun
+          schema:
+            type: boolean
+            default: false
+          description: If true, the import operation will be simulated but not actually performed.
       requestBody:
         required: true
         content:

@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Do we have this feature?" : true,
+      "Name" : "Browser Extension",
+      "Description" : "A browser plugin that extends the functionality of the main product."
+   }
+}

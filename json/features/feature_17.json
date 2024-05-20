@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Description" : "Uses AI to create and manage user personas.",
+      "Name" : "Personas",
+      "Do we have this feature?" : true
+   }
+}

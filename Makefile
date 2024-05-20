@@ -27,9 +27,29 @@ release:
 		echo "lib/AirtableGPT/Version.pm has not been modified."; \
 	fi
 
+# Rollback a specific release
+rollbackRelease:
+	@test -n "$(VERSION)" || (echo "VERSION is required" && exit 1)
+	@echo "Rolling back release $(VERSION)"
+	@if git tag | grep -q $(VERSION); then \
+		git tag -d $(VERSION); \
+		git push origin $(VERSION); \
+	fi
+	@git push origin :$(VERSION)
+	@if git ls-remote --tags origin | grep -q $(VERSION); then \
+		echo "Failed to delete tag $(VERSION) from the remote repository."; \
+		exit 1; \
+	else \
+		echo "Successfully deleted tag $(VERSION) from the remote repository."; \
+	fi
 
 getVersion:
 	@perl -Mlib=lib -MAirtableGPT::Version -e 'print "$$AirtableGPT::Version::VERSION\n"'
+
+updateVersion:
+	@test -n "$(VERSION)" || (echo "VERSION is required" && exit 1)
+	@echo "Updating Version.pm to $(VERSION)"
+	perl update_version.pl --version $(VERSION)
 
 cpanfile:
 	perl generate_cpanfile.pl > cpanfile
@@ -102,26 +122,39 @@ runReactDev:
 help:
 	@echo "Makefile for generating releases and building/pushing Docker images"
 	@echo ""
-	@echo "Usage:"
-	@echo "  make buildDocker [TAG=tag] - Build Docker image with optional tag (default: 'latest')"
-	@echo "  make runDocker [TAG=tag] - Run Docker image with optional tag (default: 'latest')"
-	@echo "  make attachDocker - Attach to the running Docker container"
-	@echo "  make pushDocker [TAG=tag] - Push Docker image to registry with optional tag (default: 'latest')"
-	@echo "  make cleanReactApp - Remove the static and app directories under resources/public"
-	@echo "  make cleanReactBuild - Remove the build directory, node_modules, and package-lock.json from react-app"
-	@echo "  make buildReactApp - Build the React application"
-	@echo "  make runReactDev - Run the React application in dev mode"
-	@echo "  make help - Display this message"
+	@echo "Repo Admin Tasks:"
+	@echo "make release VERSION=v0.1 - Create an updated Version.pm file, git tag and push it to the remote repository"
+	@echo "make rollbackRelease VERSION=v0.1 - Rollback a specific release"
+	@echo "make getVersion - Get the current version"
+	@echo "make updateVersion VERSION=v0.1 - Update the version"
+	@echo "make pushDocker [TAG=tag] - Push Docker image to registry with optional tag (default: 'latest')"
+	@echo ""
+	@echo "Developer/User Tasks:"
+	@echo "make cpanfile - Generate a cpanfile"
+	@echo "make install - Install the dependencies listed in the cpanfile"
+	@echo "make cleanJson - Clean the json directory"
+	@echo "make runWeb - Run the web application"
+	@echo "make buildDocker [TAG=tag] - Build Docker image with optional tag (default: 'latest')"
+	@echo "make stopDocker - Stop the running Docker container"
+	@echo "make removeDocker - Remove the Docker container"
+	@echo "make runDocker [TAG=tag] - Run Docker image with optional tag (default: 'latest')"
+	@echo "make attachDocker - Attach to the running Docker container"
+	@echo "make logsDocker - View the Docker container logs"
+	@echo "make cleanReactApp - Remove the static and app directories under resources/public"
+	@echo "make cleanReactBuild - Remove the build directory, node_modules, and package-lock.json from react-app"
+	@echo "make buildReactApp - Build the React application"
+	@echo "make runReactDev - Run the React application in dev mode"
+	@echo "make help - Display this message"
 	@echo ""
 	@echo "Example:"
-	@echo "  make buildDocker TAG=0.1"
-	@echo "  make runDocker TAG=0.1"
-	@echo "  make attachDocker"
-	@echo "  make pushDocker TAG=0.1"
-	@echo "  make cleanReactApp"
-	@echo "  make cleanReactBuild"
-	@echo "  make buildReactApp"
-	@echo "  make runReactDev"
+	@echo "make buildDocker TAG=0.1"
+	@echo "make runDocker TAG=0.1"
+	@echo "make attachDocker"
+	@echo "make pushDocker TAG=0.1"
+	@echo "make cleanReactApp"
+	@echo "make cleanReactBuild"
+	@echo "make buildReactApp"
+	@echo "make runReactDev"
 
 # Define default goal
 .DEFAULT_GOAL := help

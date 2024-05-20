@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Name" : "AI Summarization",
+      "Description" : "Uses AI to create summaries of documents.",
+      "Do we have this feature?" : true
+   }
+}

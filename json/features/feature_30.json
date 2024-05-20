@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Name" : "Collaborative Writing",
+      "Description" : "Facilitates group editing and writing.",
+      "Do we have this feature?" : true
+   }
+}

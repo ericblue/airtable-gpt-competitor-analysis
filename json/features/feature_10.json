@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Name" : "AI Chatbot",
+      "Description" : "A chatbot powered by artificial intelligence.",
+      "Do we have this feature?" : true
+   }
+}

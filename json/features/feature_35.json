@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Description" : "Generates visual representations like mind maps or graphs.",
+      "Name" : "MindMap or Graph Output",
+      "Do we have this feature?" : true
+   }
+}

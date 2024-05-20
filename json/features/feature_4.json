@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Name" : "Voice Notes",
+      "Description" : "Allows users to create notes using voice input.",
+      "Do we have this feature?" : true
+   }
+}

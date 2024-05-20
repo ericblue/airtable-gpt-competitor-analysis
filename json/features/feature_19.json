@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Do we have this feature?" : true,
+      "Description" : "Links related notes and topics to create a connected knowledge base.",
+      "Name" : "Connect Knowledge"
+   }
+}

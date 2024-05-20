@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Do we have this feature?" : true,
+      "Description" : "Provides instant analytics and insights based on current data.",
+      "Name" : "Real-time Insights"
+   }
+}

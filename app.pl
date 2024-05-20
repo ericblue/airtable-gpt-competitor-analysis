@@ -94,8 +94,6 @@ get '/api/analyze' => sub {
 
     my $website_url = uri_unescape($c->param('website_url'));
 
-    print "url = $website_url\n";
-
     # Check for a valid properly formatted website_url that is http or https
     if (!defined $website_url || $website_url !~ m{^https?://[^\s/$.?#].[^\s]*$}) {
         $c->render(json => { error => "Invalid website URL" });
@@ -122,25 +120,40 @@ get '/api/analyze' => sub {
 post '/api/import' => sub {
     my $c = shift;
     my $data = $c->req->json;
+    # Get the dryrun parameter, default to 0 if not provided
+    my $dryrun = $c->param('dryrun') // 0;
 
     my $airtable_importer = AirtableGPT::Importer->new(
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
         airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
+        dryrun => $dryrun,
         logger => $logger
     );
 
     $logger->debug("Importer created" . Data::Dumper->Dump([$airtable_importer]));
-    $airtable_importer->import_airtable_from_data($data);
+    $logger->info("Data to import" . Data::Dumper->Dump([$data]));
+    my $result = $airtable_importer->import_airtable_from_data($data);
+    $logger->info("Result" . Data::Dumper->Dump([$result]));
 
-    my $result = "SUCCESS";
+
+
     $c->render(json => { result => $result });
 } => 'import';
 
 get '/api/analyze-and-import' => sub {
     my $c = shift;
     my $website_url = $c->param('website_url');
+    # Get the dryrun parameter, default to 0 if not provided
+    my $dryrun = $c->param('dryrun') // 0;
+    my $leverage_existing_features = $c->param('leverage_existing_features') // 1;
 
-    my $leverage_existing_features = 1;
+    # Check for a valid properly formatted website_url that is http or https
+    if (!defined $website_url || $website_url !~ m{^https?://[^\s/$.?#].[^\s]*$}) {
+        $c->render(json => { error => "Invalid website URL" });
+        return;
+    }
+
+
     my $analyzer = AirtableGPT::CompanyAnalyzer->new(
         openai_api_key => $ENV{'OPENAI_API_KEY'},
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
@@ -156,14 +169,15 @@ get '/api/analyze-and-import' => sub {
     my $airtable_importer = AirtableGPT::Importer->new(
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
         airtable_api_key => $ENV{'AIRTABLE_API_KEY'},
+        dryrun => $dryrun,
+        $leverage_existing_features => $leverage_existing_features,
         logger => $logger
     );
 
     $logger->debug("Importer created" . Data::Dumper->Dump([$airtable_importer]));
 
-    $airtable_importer->import_airtable_from_data($data);
+    my $result = $airtable_importer->import_airtable_from_data($data);
 
-    my $result = "SUCCESS";
     $c->render(json => { result => $result });
 
 } => 'analyze-and-import';

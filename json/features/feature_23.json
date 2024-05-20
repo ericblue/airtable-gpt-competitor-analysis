@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Description" : "Customizes the AI's behavior based on user preferences.",
+      "Name" : "Personalized AI Model",
+      "Do we have this feature?" : true
+   }
+}

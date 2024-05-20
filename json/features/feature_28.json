@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Name" : "AI-powered search",
+      "Description" : "Uses AI to enhance search accuracy and relevance.",
+      "Do we have this feature?" : true
+   }
+}

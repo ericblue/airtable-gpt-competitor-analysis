@@ -162,7 +162,10 @@ The starter page gives quick links to the Github repo, Swagger endpoints, and Re
 
 React App
 
-The simple UI under the /app endpoint will allow you to Analyze a company URL, Import the data. And additionall Export all Airtable data in JSON format.
+The simple UI under the /app endpoint will allow you to:
+- Analyze a company URL and import the data
+- Perform bulk imports on a given list of URLs.  Dryruns are enabled by default to review the data before importing.
+- Export all Airtable data in JSON format.
 
 ![react-app](images/react-app.png)
 
@@ -199,6 +202,7 @@ The image can also be pulled and run from https://hub.docker.com/repository/dock
 
 ## Version History
 
+- **0.2** - 5/19/2024 -  Added bulk analyze & import features
 - **0.1** - 5/18/2024 -  Initial release
 
 ## License

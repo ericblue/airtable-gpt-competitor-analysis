@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Name" : "Flashcards",
+      "Description" : "Creates flashcards for study and review.",
+      "Do we have this feature?" : true
+   }
+}

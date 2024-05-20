@@ -1,0 +1,7 @@
+{
+   "fields" : {
+      "Name" : "Searchable transcripts",
+      "Description" : "Transcripts of audio or video that can be searched for specific content.",
+      "Do we have this feature?" : true
+   }
+}
