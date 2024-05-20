@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Do we have this feature?" : true,
-      "Description" : "Automatically organizes content based on context and relevance.",
-      "Name" : "Smart organization"
-   }
-}

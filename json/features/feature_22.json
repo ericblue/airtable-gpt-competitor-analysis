@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Do we have this feature?" : true,
-      "Name" : "Data Integration",
-      "Description" : "Supports integration with various data sources."
-   }
-}

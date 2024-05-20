@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Do we have this feature?" : true,
-      "Description" : "Generates content automatically using AI techniques.",
-      "Name" : "Content Generation"
-   }
-}

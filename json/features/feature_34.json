@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Name" : "Auto Summarization",
-      "Description" : "Automatically creates summaries of longer content.",
-      "Do we have this feature?" : true
-   }
-}

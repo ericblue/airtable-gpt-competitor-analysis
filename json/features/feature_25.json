@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Do we have this feature?" : true,
-      "Name" : "Templates",
-      "Description" : "Provides predefined templates for various use cases."
-   }
-}

@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Description" : "AI-powered automatic creation of notes.",
-      "Name" : "Automatic Note Generation",
-      "Do we have this feature?" : true
-   }
-}

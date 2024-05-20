@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Do we have this feature?" : true,
-      "Description" : "Ensures user data is protected and secure.",
-      "Name" : "Privacy and security"
-   }
-}

@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Description" : "Enables a question and answer interface within the platform.",
-      "Name" : "Q&A Functionality",
-      "Do we have this feature?" : true
-   }
-}

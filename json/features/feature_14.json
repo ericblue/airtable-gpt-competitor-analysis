@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Do we have this feature?" : true,
-      "Description" : "Provides an application programming interface for developers.",
-      "Name" : "API"
-   }
-}

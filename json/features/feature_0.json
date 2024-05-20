@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Do we have this feature?" : true,
-      "Description" : "An AI system that assists in organizing and retrieving knowledge.",
-      "Name" : "AI-powered Knowledge Base"
-   }
-}

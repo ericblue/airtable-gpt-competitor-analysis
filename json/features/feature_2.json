@@ -1,7 +1,0 @@
-{
-   "fields" : {
-      "Description" : "AI that remembers context and facts across multiple sessions.",
-      "Name" : "Memory AI",
-      "Do we have this feature?" : true
-   }
-}
