@@ -126,6 +126,8 @@ sub send_request {
     # Any major changes to the prompt and fields will require updates to api.yaml and have a
     # cascading effect on the OpenAPI schema and the generated code, and AirtableGPT::AirtableImporter class
 
+    # TODO Resolve the occasional issue with Companies, Products, and Features being returned as lowercase
+
     my $prompt = <<"END_PROMPT";
 I need to analyze the website $website_url and extract information to create JSON files for companies, products, and features.
 

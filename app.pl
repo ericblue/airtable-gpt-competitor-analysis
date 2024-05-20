@@ -122,6 +122,14 @@ post '/api/import' => sub {
     my $data = $c->req->json;
     # Get the dryrun parameter, default to 0 if not provided
     my $dryrun = $c->param('dryrun') // 0;
+    # handle dryrun value being string of 'true' or 'false' and convert to 1 or 0
+    if ($dryrun eq 'true') {
+        $dryrun = 1;
+    } elsif ($dryrun eq 'false') {
+        $dryrun = 0;
+    } else {
+        $dryrun = 0;
+    }
 
     my $airtable_importer = AirtableGPT::Importer->new(
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
@@ -145,6 +153,16 @@ get '/api/analyze-and-import' => sub {
     my $website_url = $c->param('website_url');
     # Get the dryrun parameter, default to 0 if not provided
     my $dryrun = $c->param('dryrun') // 0;
+
+    # handle dryrun value being string of 'true' or 'false' and convert to 1 or 0
+    if ($dryrun eq 'true') {
+        $dryrun = 1;
+    } elsif ($dryrun eq 'false') {
+        $dryrun = 0;
+    } else {
+        $dryrun = 0;
+    }
+
     my $leverage_existing_features = $c->param('leverage_existing_features') // 1;
 
     # Check for a valid properly formatted website_url that is http or https
@@ -165,6 +183,8 @@ get '/api/analyze-and-import' => sub {
     $logger->debug("Analyzer created" . Data::Dumper->Dump([$analyzer]));
 
     my $data = $analyzer->analyze($website_url);
+
+    $logger->info("Dry run is set to $dryrun");
 
     my $airtable_importer = AirtableGPT::Importer->new(
         airtable_base_id => $ENV{'AIRTABLE_BASE_ID'},
